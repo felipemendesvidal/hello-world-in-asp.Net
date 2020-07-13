@@ -10,7 +10,7 @@ namespace e_players.interfaces
     public interface INoticia
     {
          //crar
-        void Create(Noticia n);
+         void Criar(Noticia n);
         //ler
         List<Noticia> ReadAll();
         //alterar

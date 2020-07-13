@@ -10,7 +10,7 @@ namespace e_players.interfaces
     public interface IEquipe
     {
         //crar
-        void Create(Equipe e);
+        void Criar(Equipe e);
         //ler
         List<Equipe> ReadAll();
         //alterar
