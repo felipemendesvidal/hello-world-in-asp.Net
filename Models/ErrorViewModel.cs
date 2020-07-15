@@ -1,6 +1,6 @@
 using System;
 
-namespace e_players.Models
+namespace E_players_2.Models
 {
     public class ErrorViewModel
     {

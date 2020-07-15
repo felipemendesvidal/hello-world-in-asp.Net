@@ -1,58 +1,66 @@
 //prevenção de erros por bibliotecas
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using System.Linq;
 using System.Text;
-namespace e_players.Models
-{
+using System.Threading.Tasks;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+namespace E_players_2.Models{
     public class EplayersBase{
         /// <summary>
-        /// Metodo que cria arquivo e diretorio 
+        /// Cria o arquivo e o diretorios
         /// </summary>
-        /// <param name="a_caminho">caminho do diretorio em string</param>
-        public void CriarDiretorioeArquivo(string a_caminho){
-            string diretorio = a_caminho.Split("/")[0];
-            string arquivo = a_caminho.Split("/")[1];
+        /// <param name="_path">precisa de uma string com um caminho para salvar os arquivos</param>
+        public void CreateFolderAndFile(string _path){
 
-            //DIRETORIO
-            if(!Directory.Exists(diretorio)){
-                Directory.CreateDirectory(diretorio);
-            }//fim do if
+            string folder   = _path.Split("/")[0];
+            string file     = _path.Split("/")[1];
 
-            //ARQUIVO
-            if(!File.Exists(a_caminho)){
-                File.Create(a_caminho).Close();
-            }//fim do if
-        }//fim do criar arquivo e diretorio
+            if(!Directory.Exists(folder)){
+                Directory.CreateDirectory(folder);
+            }//end if
+
+            if(!File.Exists(_path)){
+                File.Create(_path).Close();
+            }//end if
+        }//end void createfolderandfile
 
         /// <summary>
-        /// Metodo que le todas as linhas de um csv
+        /// metodo que le todas as linhas dos csv
         /// </summary>
-        /// <param name="l_caminho">caminho do csv</param>
-        /// <returns>retorna todas as linhas desse csv</returns>
-        public List<string> LerTodasAsLinhas(string l_caminho){
-            List <string> linhas_arquivo = new List<string>();
-            using(StreamReader arquivo = new StreamReader(l_caminho)){
-                string linhaLida;
-                while (linhaLida = arquivo.ReadLine()){
-                    linhas_arquivo.Add(linhaLida);
-                }//fim do while
-            }//fim do using
-            return linhas_arquivo;
-        }//fim do metodo ler
+        /// <param name="PATH">caminho</param>
+        /// <returns>linhas do csv</returns>
+        public List<string> ReadAllLinesCSV(string PATH){
+            
+            List<string> linhas = new List<string>();
+            using(StreamReader file = new StreamReader(PATH))
+            {
+                string linha;
+                while((linha = file.ReadLine()) != null)
+                {
+                    linhas.Add(linha);
+                }//end while
+            }//end using
+            return linhas;
+        }//end readalllinescsv
 
         /// <summary>
-        /// Esse metodo le as linhas e reescreve elas
+        /// metodo que reescreve as linhas do csv
         /// </summary>
-        /// <param name="r_caminho">caminho do csv</param>
-        /// <param name="linhas_arquivo">linhas analisadas do arquivo do arquivo</param>
-        public void ReescreverCSV(string r_caminho, List<string> linhas_arquivo){
-            using(StreamWriter saida = new StreamWriter(r_caminho)){
-                foreach(var item in linhas_arquivo){
-                    saida.Write(item + "\n");
-                }//fim foreach
-            }//fim do using
-        }//fim do metodo reescrever 
-    }//fim da classe principal * epla
-}
+        /// <param name="PATH">caminho</param>
+        /// <param name="linhas">lista com linhas novas</param>
+        public void RewriteCSV(string PATH, List<string> linhas)
+        {
+            using(StreamWriter output = new StreamWriter(PATH))
+            {
+                foreach (var item in linhas)
+                {
+                    output.Write(item + "\n");
+                }//end foreach
+            }//end using
+        }//end rewrite
+    }//end class eplayersBase
+}//end namespace

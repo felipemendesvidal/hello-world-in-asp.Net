@@ -1,25 +1,19 @@
 //prevenção de erros por bibliotecas
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System;
 using System.Linq;
 using System.Text;
-
-namespace e_players.Models
-{
+using System.Threading.Tasks;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+namespace E_players_2.Models{
     public class Jogador{
-        //propriedade
+        //propriedades
         public int IdJogador { get; set; }
         public string Nome { get; set; }
         public int IdEquipe { get; set; }
-
-        //interface
-        //contrutor
-
-
-
-
-
         
-    }//fim classe principal * public class jogador
-}
+    }//end class jogador
+}//end namespace

@@ -10,15 +10,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using E_players_2.Models;
 namespace E_players_2.Interfaces{
-    public interface IEquipe{
-        //metodos de crud: criar, ler, alterar e excluir
-        void Create(Equipe e);
+    public interface INoticias{
+        //metodos de crud
+        void Create(Noticia n);
 
-        List<Equipe> ReadAll();
+        List<Noticia> ReadAll();
 
-        void Update(Equipe e);
+        void Update(Noticia n);
 
         void Delete(int id);
          
-    }//end interface iequipe
+    }//end interface INoticias
 }//end namespace
